@@ -9,7 +9,8 @@ class GetRequester:
 
     def get_response_body(self):
         response =requests.get(self.url)
-        return response.content
+      
+        return json.loads(response.content)
 
     def load_json(self):
         program_list=[]
@@ -17,3 +18,11 @@ class GetRequester:
         for program in programs:
             program_list.append(program)
         return program_list
+    
+
+# Create an instance of GetRequester with your URL
+get_requester = GetRequester('https://learn-co-curriculum.github.io/json-site-example/endpoints/people.json')
+
+response_body = get_requester.get_response_body()
+
+print(json.dumps(response_body,indent=4,sort_keys=True))
